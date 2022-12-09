@@ -1,0 +1,18 @@
+{
+    "sourceFile": "package.json",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 0,
+            "patches": [
+                {
+                    "date": 1670571968082,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                }
+            ],
+            "date": 1670571968082,
+            "name": "Commit-0",
+            "content": "{\n  \"name\": \"lecture-3\",\n  \"version\": \"0.1.0\",\n  \"private\": true,\n  \"dependencies\": {\n    \"@testing-library/jest-dom\": \"^4.2.4\",\n    \"@testing-library/react\": \"^9.3.2\",\n    \"@testing-library/user-event\": \"^7.1.2\",\n    \"axios\": \"^0.19.1\",\n    \"cors\": \"^2.8.5\",\n    \"express\": \"^4.17.1\",\n    \"fontfaceobserver\": \"^2.3.0\",\n    \"react\": \"^16.12.0\",\n    \"react-dom\": \"^16.12.0\",\n    \"react-router-dom\": \"^5.1.2\",\n    \"react-scripts\": \"3.3.0\",\n    \"tailwindcss\": \"^1.1.4\"\n  },\n  \"scripts\": {\n    \"start\": \"npm run build:style && react-app-rewired start\",\n    \"build\": \"npm run build:style && react-app-rewired build\",\n    \"build:style\": \"postcss src/tailwind.css -o src/styles.css\",\n    \"serve\": \"node ./server/server.js\",\n    \"server\": \"node ./node_modules/json-server/lib/cli/bin.js --watch ./server/database.json -c ./server/config.json\"\n  },\n  \"eslintConfig\": {\n    \"extends\": \"react-app\"\n  },\n  \"browserslist\": {\n    \"production\": [\n      \">0.2%\",\n      \"not dead\",\n      \"not op_mini all\"\n    ],\n    \"development\": [\n      \"last 1 chrome version\",\n      \"last 1 firefox version\",\n      \"last 1 safari version\"\n    ]\n  },\n  \"devDependencies\": {\n    \"autoprefixer\": \"^9.7.3\",\n    \"json-server\": \"^0.15.1\",\n    \"postcss-cli\": \"^7.1.0\",\n    \"react-app-rewired\": \"^2.2.1\",\n    \"serve\": \"^11.3.2\"\n  }\n}\n"
+        }
+    ]
+}

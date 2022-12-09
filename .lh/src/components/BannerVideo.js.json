@@ -1,0 +1,70 @@
+{
+    "sourceFile": "src/components/BannerVideo.js",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 13,
+            "patches": [
+                {
+                    "date": 1670550382657,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1670550393452,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,6 +1,6 @@\n import React from \"react\"\n-import video from \"../assets/banner-video.webm\"\n+import video from \"../assets/banner-video.WebM\"\n \n function BannerVideo() {\n   return (\n     <div className=\"BannerVideo w-full h-screen overflow-hidden relative bg-texture\">\n"
+                },
+                {
+                    "date": 1670550605254,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,18 +1,20 @@\n import React from \"react\"\n-import video from \"../assets/banner-video.WebM\"\n+import videoWebm from \"../assets/banner-video.WebM\"\n+import videoMp4 from \"../assets/banner-video.mp4\"\n \n function BannerVideo() {\n   return (\n     <div className=\"BannerVideo w-full h-screen overflow-hidden relative bg-texture\">\n       <div className=\"absolute h-screen w-full left-1/2\">\n         <video\n-          src={video}\n           className=\"absolute translateX--1/2 h-screen max-w-none min-w-screen -z-1 bg-black min-w-full min-h-screen\"\n           autoPlay\n           loop\n           muted\n-        />\n+        >\n+          <source src={videoWebm} type=\"video/WebM\" />\n+        </video>\n       </div>\n       <div className=\"w-full h-full flex justify-center items-center\">\n         <div className=\"text-white text-center\">\n           <div className=\"text-6xl leading-none font-semibold\">KEEP</div>\n"
+                },
+                {
+                    "date": 1670550631602,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -11,9 +11,10 @@\n           autoPlay\n           loop\n           muted\n         >\n-          <source src={videoWebm} type=\"video/WebM\" />\n+          <source src={videoWebm} type=\"video/webm\" />\n+          <source src={videoMp4} type=\"video/mp4\" />\n         </video>\n       </div>\n       <div className=\"w-full h-full flex justify-center items-center\">\n         <div className=\"text-white text-center\">\n"
+                },
+                {
+                    "date": 1670553300074,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,7 +1,8 @@\n import React from \"react\"\n import videoWebm from \"../assets/banner-video.WebM\"\n import videoMp4 from \"../assets/banner-video.mp4\"\n+import FontFaceObserver from \"fontfaceobserver\"\n \n function BannerVideo() {\n   return (\n     <div className=\"BannerVideo w-full h-screen overflow-hidden relative bg-texture\">\n"
+                },
+                {
+                    "date": 1670553318517,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -3,8 +3,9 @@\n import videoMp4 from \"../assets/banner-video.mp4\"\n import FontFaceObserver from \"fontfaceobserver\"\n \n function BannerVideo() {\n+  const font = new FontFaceObserver(\"\")\n   return (\n     <div className=\"BannerVideo w-full h-screen overflow-hidden relative bg-texture\">\n       <div className=\"absolute h-screen w-full left-1/2\">\n         <video\n"
+                },
+                {
+                    "date": 1670553331512,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -3,9 +3,9 @@\n import videoMp4 from \"../assets/banner-video.mp4\"\n import FontFaceObserver from \"fontfaceobserver\"\n \n function BannerVideo() {\n-  const font = new FontFaceObserver(\"\")\n+  const font = new FontFaceObserver(\" BMYEONSUNG\")\n   return (\n     <div className=\"BannerVideo w-full h-screen overflow-hidden relative bg-texture\">\n       <div className=\"absolute h-screen w-full left-1/2\">\n         <video\n"
+                },
+                {
+                    "date": 1670553372195,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -3,9 +3,14 @@\n import videoMp4 from \"../assets/banner-video.mp4\"\n import FontFaceObserver from \"fontfaceobserver\"\n \n function BannerVideo() {\n-  const font = new FontFaceObserver(\" BMYEONSUNG\")\n+  const font = new FontFaceObserver(\"BMYEONSUNG\")\n+\n+  font.load().then(() => {\n+    console.log(\"font observer\")\n+  })\n+\n   return (\n     <div className=\"BannerVideo w-full h-screen overflow-hidden relative bg-texture\">\n       <div className=\"absolute h-screen w-full left-1/2\">\n         <video\n"
+                },
+                {
+                    "date": 1670553582403,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,10 +1,11 @@\n-import React from \"react\"\n+import React, { useState } from \"react\"\n import videoWebm from \"../assets/banner-video.WebM\"\n import videoMp4 from \"../assets/banner-video.mp4\"\n import FontFaceObserver from \"fontfaceobserver\"\n \n function BannerVideo() {\n+  const [isFontLoaded, setIsFontLoaded] = useState(false)\n   const font = new FontFaceObserver(\"BMYEONSUNG\")\n \n   font.load().then(() => {\n     console.log(\"font observer\")\n@@ -22,9 +23,12 @@\n           <source src={videoWebm} type=\"video/webm\" />\n           <source src={videoMp4} type=\"video/mp4\" />\n         </video>\n       </div>\n-      <div className=\"w-full h-full flex justify-center items-center\">\n+      <div\n+        className=\"w-full h-full flex justify-center items-center\"\n+        style={{ opacity: isFontLoaded ? \"1\" : \"0\", transition: \"all 0.5s\" }}\n+      >\n         <div className=\"text-white text-center\">\n           <div className=\"text-6xl leading-none font-semibold\">KEEP</div>\n           <div className=\"text-6xl leading-none font-semibold\">CALM</div>\n           <div className=\"text-3xl leading-loose\">AND</div>\n"
+                },
+                {
+                    "date": 1670553598036,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -8,8 +8,9 @@\n   const font = new FontFaceObserver(\"BMYEONSUNG\")\n \n   font.load().then(() => {\n     console.log(\"font observer\")\n+    setIsFontLoaded(true)\n   })\n \n   return (\n     <div className=\"BannerVideo w-full h-screen overflow-hidden relative bg-texture\">\n"
+                },
+                {
+                    "date": 1670553610684,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -26,9 +26,12 @@\n         </video>\n       </div>\n       <div\n         className=\"w-full h-full flex justify-center items-center\"\n-        style={{ opacity: isFontLoaded ? \"1\" : \"0\", transition: \"all 0.5s\" }}\n+        style={{\n+          opacity: isFontLoaded ? \"1\" : \"0\",\n+          transition: \"opacity all 0.5s\",\n+        }}\n       >\n         <div className=\"text-white text-center\">\n           <div className=\"text-6xl leading-none font-semibold\">KEEP</div>\n           <div className=\"text-6xl leading-none font-semibold\">CALM</div>\n"
+                },
+                {
+                    "date": 1670553629582,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -28,9 +28,9 @@\n       <div\n         className=\"w-full h-full flex justify-center items-center\"\n         style={{\n           opacity: isFontLoaded ? \"1\" : \"0\",\n-          transition: \"opacity all 0.5s\",\n+          transition: \"all 0.3s ease\",\n         }}\n       >\n         <div className=\"text-white text-center\">\n           <div className=\"text-6xl leading-none font-semibold\">KEEP</div>\n"
+                },
+                {
+                    "date": 1670553641341,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,17 +1,19 @@\n-import React, { useState } from \"react\"\n+import React, { useEffect, useState } from \"react\"\n import videoWebm from \"../assets/banner-video.WebM\"\n import videoMp4 from \"../assets/banner-video.mp4\"\n import FontFaceObserver from \"fontfaceobserver\"\n \n function BannerVideo() {\n   const [isFontLoaded, setIsFontLoaded] = useState(false)\n   const font = new FontFaceObserver(\"BMYEONSUNG\")\n \n-  font.load().then(() => {\n-    console.log(\"font observer\")\n-    setIsFontLoaded(true)\n-  })\n+  useEffect(() => {\n+    font.load().then(() => {\n+      console.log(\"font observer\")\n+      setIsFontLoaded(true)\n+    })\n+  }, [font])\n \n   return (\n     <div className=\"BannerVideo w-full h-screen overflow-hidden relative bg-texture\">\n       <div className=\"absolute h-screen w-full left-1/2\">\n"
+                },
+                {
+                    "date": 1670569250413,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -3,17 +3,17 @@\n import videoMp4 from \"../assets/banner-video.mp4\"\n import FontFaceObserver from \"fontfaceobserver\"\n \n function BannerVideo() {\n-  const [isFontLoaded, setIsFontLoaded] = useState(false)\n-  const font = new FontFaceObserver(\"BMYEONSUNG\")\n+  // const [isFontLoaded, setIsFontLoaded] = useState(false)\n+  // const font = new FontFaceObserver(\"BMYEONSUNG\")\n \n-  useEffect(() => {\n-    font.load().then(() => {\n-      console.log(\"font observer\")\n-      setIsFontLoaded(true)\n-    })\n-  }, [font])\n+  // useEffect(() => {\n+  //   font.load().then(() => {\n+  //     console.log(\"font observer\")\n+  //     setIsFontLoaded(true)\n+  //   })\n+  // }, [font])\n \n   return (\n     <div className=\"BannerVideo w-full h-screen overflow-hidden relative bg-texture\">\n       <div className=\"absolute h-screen w-full left-1/2\">\n@@ -29,9 +29,9 @@\n       </div>\n       <div\n         className=\"w-full h-full flex justify-center items-center\"\n         style={{\n-          opacity: isFontLoaded ? \"1\" : \"0\",\n+          // opacity: isFontLoaded ? \"1\" : \"0\",\n           transition: \"all 0.3s ease\",\n         }}\n       >\n         <div className=\"text-white text-center\">\n"
+                }
+            ],
+            "date": 1670550382657,
+            "name": "Commit-0",
+            "content": "import React from \"react\"\nimport video from \"../assets/banner-video.webm\"\n\nfunction BannerVideo() {\n  return (\n    <div className=\"BannerVideo w-full h-screen overflow-hidden relative bg-texture\">\n      <div className=\"absolute h-screen w-full left-1/2\">\n        <video\n          src={video}\n          className=\"absolute translateX--1/2 h-screen max-w-none min-w-screen -z-1 bg-black min-w-full min-h-screen\"\n          autoPlay\n          loop\n          muted\n        />\n      </div>\n      <div className=\"w-full h-full flex justify-center items-center\">\n        <div className=\"text-white text-center\">\n          <div className=\"text-6xl leading-none font-semibold\">KEEP</div>\n          <div className=\"text-6xl leading-none font-semibold\">CALM</div>\n          <div className=\"text-3xl leading-loose\">AND</div>\n          <div className=\"text-6xl leading-none font-semibold\">RIDE</div>\n          <div className=\"text-5xl leading-tight font-semibold\">LONGBOARD</div>\n        </div>\n      </div>\n    </div>\n  )\n}\n\nexport default BannerVideo\n"
+        }
+    ]
+}

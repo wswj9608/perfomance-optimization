@@ -1,0 +1,82 @@
+{
+    "sourceFile": "src/pages/MainPage.js",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 16,
+            "patches": [
+                {
+                    "date": 1670488038221,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1670488146496,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -12,9 +12,16 @@\n import main_styles from \"../assets/main-styles.jpg\"\n \n function MainPage(props) {\n   const threeColumnsRef = useRef(null)\n+  const itemsRef = useRef(null)\n+  const partsRef = useRef(null)\n+  const stylesRef = useRef(null)\n \n+  const handleObserver = () => {\n+    console.log(\"1111\")\n+  }\n+\n   return (\n     <div className=\"MainPage -mt-16\">\n       <BannerVideo />\n       <div className=\"mx-auto\">\n"
+                },
+                {
+                    "date": 1670488255234,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,5 +1,5 @@\n-import React, { useRef } from \"react\"\n+import React, { useEffect, useRef } from \"react\"\n import BannerVideo from \"../components/BannerVideo\"\n import ThreeColumns from \"../components/ThreeColumns\"\n import TwoColumns from \"../components/TwoColumns\"\n import Card from \"../components/Card\"\n@@ -20,8 +20,18 @@\n   const handleObserver = () => {\n     console.log(\"1111\")\n   }\n \n+  useEffect(() => {\n+    const observerOption = {\n+      root: null,\n+      rootMargin: \"0px\",\n+      // threshold :\n+    }\n+    const observer = new IntersectionObserver(handleObserver, observerOption)\n+    observer.observe(threeColumnsRef)\n+  }, [])\n+\n   return (\n     <div className=\"MainPage -mt-16\">\n       <BannerVideo />\n       <div className=\"mx-auto\">\n"
+                },
+                {
+                    "date": 1670488273585,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -20,17 +20,16 @@\n   const handleObserver = () => {\n     console.log(\"1111\")\n   }\n \n-  useEffect(() => {\n-    const observerOption = {\n-      root: null,\n-      rootMargin: \"0px\",\n-      // threshold :\n-    }\n-    const observer = new IntersectionObserver(handleObserver, observerOption)\n-    observer.observe(threeColumnsRef)\n-  }, [])\n+  const observerOption = {\n+    root: null,\n+    rootMargin: \"0px\",\n+    // threshold :\n+  }\n+  const observer = new IntersectionObserver(handleObserver, observerOption)\n+  observer.observe(threeColumnsRef)\n+  useEffect(() => {}, [])\n \n   return (\n     <div className=\"MainPage -mt-16\">\n       <BannerVideo />\n"
+                },
+                {
+                    "date": 1670488297828,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -26,9 +26,9 @@\n     rootMargin: \"0px\",\n     // threshold :\n   }\n   const observer = new IntersectionObserver(handleObserver, observerOption)\n-  observer.observe(threeColumnsRef)\n+  observer.observe(threeColumnsRef.current)\n   useEffect(() => {}, [])\n \n   return (\n     <div className=\"MainPage -mt-16\">\n"
+                },
+                {
+                    "date": 1670488316299,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -26,9 +26,9 @@\n     rootMargin: \"0px\",\n     // threshold :\n   }\n   const observer = new IntersectionObserver(handleObserver, observerOption)\n-  observer.observe(threeColumnsRef.current)\n+  observer.observe(threeColumnsRef)\n   useEffect(() => {}, [])\n \n   return (\n     <div className=\"MainPage -mt-16\">\n"
+                },
+                {
+                    "date": 1670488324670,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -34,8 +34,9 @@\n     <div className=\"MainPage -mt-16\">\n       <BannerVideo />\n       <div className=\"mx-auto\">\n         <ThreeColumns\n+          ref={threeColumnsRef}\n           columns={[\n             <Card image={main1}>롱보드는 아주 재밌습니다.</Card>,\n             <Card image={main2}>롱보드를 타면 아주 신납니다.</Card>,\n             <Card image={main3}>롱보드는 굉장히 재밌습니다.</Card>,\n"
+                },
+                {
+                    "date": 1670488335279,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -25,11 +25,12 @@\n     root: null,\n     rootMargin: \"0px\",\n     // threshold :\n   }\n-  const observer = new IntersectionObserver(handleObserver, observerOption)\n-  observer.observe(threeColumnsRef)\n-  useEffect(() => {}, [])\n+  useEffect(() => {\n+    const observer = new IntersectionObserver(handleObserver, observerOption)\n+    observer.observe(threeColumnsRef)\n+  }, [observerOption])\n \n   return (\n     <div className=\"MainPage -mt-16\">\n       <BannerVideo />\n"
+                },
+                {
+                    "date": 1670488363564,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -27,10 +27,12 @@\n     // threshold :\n   }\n   useEffect(() => {\n     const observer = new IntersectionObserver(handleObserver, observerOption)\n-    observer.observe(threeColumnsRef)\n-  }, [observerOption])\n+    if (threeColumnsRef) {\n+      observer.observe(threeColumnsRef)\n+    }\n+  }, [observerOption, threeColumnsRef])\n \n   return (\n     <div className=\"MainPage -mt-16\">\n       <BannerVideo />\n"
+                },
+                {
+                    "date": 1670488374126,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -28,9 +28,9 @@\n   }\n   useEffect(() => {\n     const observer = new IntersectionObserver(handleObserver, observerOption)\n     if (threeColumnsRef) {\n-      observer.observe(threeColumnsRef)\n+      observer.observe(threeColumnsRef.current)\n     }\n   }, [observerOption, threeColumnsRef])\n \n   return (\n"
+                },
+                {
+                    "date": 1670488444049,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -16,24 +16,8 @@\n   const itemsRef = useRef(null)\n   const partsRef = useRef(null)\n   const stylesRef = useRef(null)\n \n-  const handleObserver = () => {\n-    console.log(\"1111\")\n-  }\n-\n-  const observerOption = {\n-    root: null,\n-    rootMargin: \"0px\",\n-    // threshold :\n-  }\n-  useEffect(() => {\n-    const observer = new IntersectionObserver(handleObserver, observerOption)\n-    if (threeColumnsRef) {\n-      observer.observe(threeColumnsRef.current)\n-    }\n-  }, [observerOption, threeColumnsRef])\n-\n   return (\n     <div className=\"MainPage -mt-16\">\n       <BannerVideo />\n       <div className=\"mx-auto\">\n"
+                },
+                {
+                    "date": 1670546981040,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -3,11 +3,11 @@\n import ThreeColumns from \"../components/ThreeColumns\"\n import TwoColumns from \"../components/TwoColumns\"\n import Card from \"../components/Card\"\n import Meta from \"../components/Meta\"\n-import main1 from \"../assets/main1.jpg\"\n-import main2 from \"../assets/main2.jpg\"\n-import main3 from \"../assets/main3.jpg\"\n+import main1 from \"../assets/main1.webp\"\n+import main2 from \"../assets/main2.webp\"\n+import main3 from \"../assets/main3.webp\"\n import main_items from \"../assets/main-items.jpg\"\n import main_parts from \"../assets/main-parts.jpg\"\n import main_styles from \"../assets/main-styles.jpg\"\n \n"
+                },
+                {
+                    "date": 1670547035808,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -11,9 +11,8 @@\n import main_parts from \"../assets/main-parts.jpg\"\n import main_styles from \"../assets/main-styles.jpg\"\n \n function MainPage(props) {\n-  const threeColumnsRef = useRef(null)\n   const itemsRef = useRef(null)\n   const partsRef = useRef(null)\n   const stylesRef = useRef(null)\n \n@@ -21,9 +20,8 @@\n     <div className=\"MainPage -mt-16\">\n       <BannerVideo />\n       <div className=\"mx-auto\">\n         <ThreeColumns\n-          ref={threeColumnsRef}\n           columns={[\n             <Card image={main1}>롱보드는 아주 재밌습니다.</Card>,\n             <Card image={main2}>롱보드를 타면 아주 신납니다.</Card>,\n             <Card image={main3}>롱보드는 굉장히 재밌습니다.</Card>,\n"
+                },
+                {
+                    "date": 1670547586274,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -3,11 +3,12 @@\n import ThreeColumns from \"../components/ThreeColumns\"\n import TwoColumns from \"../components/TwoColumns\"\n import Card from \"../components/Card\"\n import Meta from \"../components/Meta\"\n-import main1 from \"../assets/main1.webp\"\n-import main2 from \"../assets/main2.webp\"\n-import main3 from \"../assets/main3.webp\"\n+import main1Webp from \"../assets/_main1.webp\"\n+import main2Webp from \"../assets/_main2.webp\"\n+import main3Webp from \"../assets/_main3.webp\"\n+import main3 from \"../assets/main3.jpg\"\n import main_items from \"../assets/main-items.jpg\"\n import main_parts from \"../assets/main-parts.jpg\"\n import main_styles from \"../assets/main-styles.jpg\"\n \n"
+                },
+                {
+                    "date": 1670547597362,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -6,8 +6,10 @@\n import Meta from \"../components/Meta\"\n import main1Webp from \"../assets/_main1.webp\"\n import main2Webp from \"../assets/_main2.webp\"\n import main3Webp from \"../assets/_main3.webp\"\n+import main1 from \"../assets/main1.jpg\"\n+import main2 from \"../assets/main2.jpg\"\n import main3 from \"../assets/main3.jpg\"\n import main_items from \"../assets/main-items.jpg\"\n import main_parts from \"../assets/main-parts.jpg\"\n import main_styles from \"../assets/main-styles.jpg\"\n"
+                },
+                {
+                    "date": 1670547790414,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -24,9 +24,11 @@\n       <BannerVideo />\n       <div className=\"mx-auto\">\n         <ThreeColumns\n           columns={[\n-            <Card image={main1}>롱보드는 아주 재밌습니다.</Card>,\n+            <Card webpImage={main1Webp} image={main1}>\n+              롱보드는 아주 재밌습니다.\n+            </Card>,\n             <Card image={main2}>롱보드를 타면 아주 신납니다.</Card>,\n             <Card image={main3}>롱보드는 굉장히 재밌습니다.</Card>,\n           ]}\n         />\n"
+                },
+                {
+                    "date": 1670547801000,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -27,10 +27,14 @@\n           columns={[\n             <Card webpImage={main1Webp} image={main1}>\n               롱보드는 아주 재밌습니다.\n             </Card>,\n-            <Card image={main2}>롱보드를 타면 아주 신납니다.</Card>,\n-            <Card image={main3}>롱보드는 굉장히 재밌습니다.</Card>,\n+            <Card webpImage={main2Webp} image={main2}>\n+              롱보드를 타면 아주 신납니다.\n+            </Card>,\n+            <Card webpImage={main3Webp} image={main3}>\n+              롱보드는 굉장히 재밌습니다.\n+            </Card>,\n           ]}\n         />\n         <TwoColumns\n           bgColor={\"#f4f4f4\"}\n"
+                }
+            ],
+            "date": 1670488038221,
+            "name": "Commit-0",
+            "content": "import React, { useRef } from \"react\"\nimport BannerVideo from \"../components/BannerVideo\"\nimport ThreeColumns from \"../components/ThreeColumns\"\nimport TwoColumns from \"../components/TwoColumns\"\nimport Card from \"../components/Card\"\nimport Meta from \"../components/Meta\"\nimport main1 from \"../assets/main1.jpg\"\nimport main2 from \"../assets/main2.jpg\"\nimport main3 from \"../assets/main3.jpg\"\nimport main_items from \"../assets/main-items.jpg\"\nimport main_parts from \"../assets/main-parts.jpg\"\nimport main_styles from \"../assets/main-styles.jpg\"\n\nfunction MainPage(props) {\n  const threeColumnsRef = useRef(null)\n\n  return (\n    <div className=\"MainPage -mt-16\">\n      <BannerVideo />\n      <div className=\"mx-auto\">\n        <ThreeColumns\n          columns={[\n            <Card image={main1}>롱보드는 아주 재밌습니다.</Card>,\n            <Card image={main2}>롱보드를 타면 아주 신납니다.</Card>,\n            <Card image={main3}>롱보드는 굉장히 재밌습니다.</Card>,\n          ]}\n        />\n        <TwoColumns\n          bgColor={\"#f4f4f4\"}\n          columns={[\n            <img src={main_items} />,\n            <Meta\n              title={\"Items\"}\n              content={\n                \"롱보드는 기본적으로 데크가 크기 때문에 입맛에 따라 정말 여러가지로 변형된 형태가 나올수 있습니다. 실제로 데크마다 가지는 모양, 재질, 무게는 천차만별인데, 본인의 라이딩 스타일에 맞춰 롱보드를 구매하시는게 좋습니다.\"\n              }\n              btnLink={\"/items\"}\n            />,\n          ]}\n        />\n        <TwoColumns\n          bgColor={\"#fafafa\"}\n          columns={[\n            <Meta\n              title={\"Parts of Longboard\"}\n              content={\n                \"롱보드는 데크, 트럭, 휠, 킹핀, 베어링 등 여러 부품들로 구성됩니다. 롱보드를 타다보면 조금씩 고장나는 부품이 있기 마련인데, 이럴때를 위해 롱보들의 부품들에 대해서 알고 있으면 큰 도움이 됩니다.\"\n              }\n              btnLink={\"/part\"}\n            />,\n            <img src={main_parts} />,\n          ]}\n          mobileReverse={true}\n        />\n        <TwoColumns\n          bgColor={\"#f4f4f4\"}\n          columns={[\n            <img src={main_styles} />,\n            <Meta\n              title={\"Riding Styles\"}\n              content={\n                \"롱보드 라이딩 스타일에는 크게 프리스타일, 다운힐, 프리라이딩, 댄싱이 있습니다. 보통 롱보드는 라이딩 스타일에 따라 데크의 모양이 조금씩 달라집니다. 많은 롱보드 매니아들이 각 쓰임새에 맞는 보드들을 소유하고 있습니다.\"\n              }\n              btnLink={\"/riding-styles\"}\n            />,\n          ]}\n        />\n      </div>\n    </div>\n  )\n}\n\nexport default MainPage\n"
+        }
+    ]
+}

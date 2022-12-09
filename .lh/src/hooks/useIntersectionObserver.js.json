@@ -1,0 +1,58 @@
+{
+    "sourceFile": "src/hooks/useIntersectionObserver.js",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 10,
+            "patches": [
+                {
+                    "date": 1670489796426,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1670489928449,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,1 +1,5 @@\n-rs\n+import React from \"react\"\n+\n+export default function useIntersectionObserverr() {\n+  return <div></div>\n+}\n"
+                },
+                {
+                    "date": 1670489939208,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,5 +1,5 @@\n import React from \"react\"\n \n export default function useIntersectionObserverr() {\n-  return <div></div>\n+  return {}\n }\n"
+                },
+                {
+                    "date": 1670489965824,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,5 +1,25 @@\n-import React from \"react\"\n+import React, { useEffect } from \"react\"\n \n export default function useIntersectionObserverr() {\n+  useEffect(() => {\n+    const handleObserver = (entries, observer) => {\n+      entries.forEach((entrie) => {\n+        if (entrie.isIntersecting) {\n+          entrie.target.src = entrie.target.dataset.src\n+          observer.unobserve(imgRef.current)\n+        }\n+      })\n+    }\n+\n+    const observerOption = {\n+      root: null,\n+      rootMargin: \"0px\",\n+      // threshold :\n+    }\n+\n+    const observer = new IntersectionObserver(handleObserver, observerOption)\n+\n+    observer.observe(imgRef.current)\n+  }, [])\n   return {}\n }\n"
+                },
+                {
+                    "date": 1670544694800,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,13 +1,13 @@\n import React, { useEffect } from \"react\"\n \n-export default function useIntersectionObserverr() {\n+export default function useIntersectionObserverr(elementRef) {\n   useEffect(() => {\n     const handleObserver = (entries, observer) => {\n       entries.forEach((entrie) => {\n         if (entrie.isIntersecting) {\n           entrie.target.src = entrie.target.dataset.src\n-          observer.unobserve(imgRef.current)\n+          observer.unobserve(elementRef.current)\n         }\n       })\n     }\n \n@@ -19,7 +19,7 @@\n \n     const observer = new IntersectionObserver(handleObserver, observerOption)\n \n     observer.observe(imgRef.current)\n-  }, [])\n+  }, [elementRef])\n   return {}\n }\n"
+                },
+                {
+                    "date": 1670544714760,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -18,8 +18,8 @@\n     }\n \n     const observer = new IntersectionObserver(handleObserver, observerOption)\n \n-    observer.observe(imgRef.current)\n+    observer.observe(elementRef.current)\n   }, [elementRef])\n   return {}\n }\n"
+                },
+                {
+                    "date": 1670544731683,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -20,6 +20,5 @@\n     const observer = new IntersectionObserver(handleObserver, observerOption)\n \n     observer.observe(elementRef.current)\n   }, [elementRef])\n-  return {}\n }\n"
+                },
+                {
+                    "date": 1670544900945,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,7 +1,8 @@\n-import React, { useEffect } from \"react\"\n+import React, { useEffect, useState } from \"react\"\n \n export default function useIntersectionObserverr(elementRef) {\n+  const [observer, setObserver] = useState()\n   useEffect(() => {\n     const handleObserver = (entries, observer) => {\n       entries.forEach((entrie) => {\n         if (entrie.isIntersecting) {\n@@ -16,9 +17,7 @@\n       rootMargin: \"0px\",\n       // threshold :\n     }\n \n-    const observer = new IntersectionObserver(handleObserver, observerOption)\n-\n-    observer.observe(elementRef.current)\n+    setObserver(new IntersectionObserver(handleObserver, observerOption))\n   }, [elementRef])\n }\n"
+                },
+                {
+                    "date": 1670544906887,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -19,5 +19,7 @@\n     }\n \n     setObserver(new IntersectionObserver(handleObserver, observerOption))\n   }, [elementRef])\n+\n+  return { observer }\n }\n"
+                },
+                {
+                    "date": 1670548026366,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -5,10 +5,12 @@\n   useEffect(() => {\n     const handleObserver = (entries, observer) => {\n       entries.forEach((entrie) => {\n         if (entrie.isIntersecting) {\n-          entrie.target.src = entrie.target.dataset.src\n-          observer.unobserve(elementRef.current)\n+          const target = entrie.target\n+          const previousSibling = target.previousSibling\n+          target.src = target.dataset.src\n+          previousSibling.serset = observer.unobserve(elementRef.current)\n         }\n       })\n     }\n \n"
+                },
+                {
+                    "date": 1670548059830,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -8,9 +8,10 @@\n         if (entrie.isIntersecting) {\n           const target = entrie.target\n           const previousSibling = target.previousSibling\n           target.src = target.dataset.src\n-          previousSibling.serset = observer.unobserve(elementRef.current)\n+          previousSibling.srcset = previousSibling.dataset.srcset\n+          observer.unobserve(elementRef.current)\n         }\n       })\n     }\n \n"
+                }
+            ],
+            "date": 1670489796426,
+            "name": "Commit-0",
+            "content": "rs\n"
+        }
+    ]
+}

@@ -1,0 +1,130 @@
+{
+    "sourceFile": "src/components/Card.js",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 28,
+            "patches": [
+                {
+                    "date": 1670488451369,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1670488486673,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -10,11 +10,8 @@\n     rootMargin: \"0px\",\n     // threshold :\n   }\n   const observer = new IntersectionObserver(handleObserver, observerOption)\n-  if (threeColumnsRef) {\n-    observer.observe(threeColumnsRef.current)\n-  }\n \n   return (\n     <div className=\"Card text-center\">\n       <img src={props.image} />\n"
+                },
+                {
+                    "date": 1670488554093,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,7 +1,9 @@\n-import React from \"react\"\n+import React, { useRef } from \"react\"\n \n function Card(props) {\n+  const imgRef = useRef(null)\n+\n   const handleObserver = () => {\n     console.log(\"1111\")\n   }\n \n@@ -13,9 +15,9 @@\n   const observer = new IntersectionObserver(handleObserver, observerOption)\n \n   return (\n     <div className=\"Card text-center\">\n-      <img src={props.image} />\n+      <img src={props.image} ref={imgRef} />\n       <div className=\"p-5 font-semibold text-gray-700 text-xl md:text-lg lg:text-xl keep-all\">\n         {props.children}\n       </div>\n     </div>\n"
+                },
+                {
+                    "date": 1670488592651,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,19 +1,22 @@\n-import React, { useRef } from \"react\"\n+import React, { useEffect, useRef } from \"react\"\n \n function Card(props) {\n   const imgRef = useRef(null)\n \n   const handleObserver = () => {\n     console.log(\"1111\")\n   }\n \n-  const observerOption = {\n-    root: null,\n-    rootMargin: \"0px\",\n-    // threshold :\n-  }\n-  const observer = new IntersectionObserver(handleObserver, observerOption)\n+  useEffect(() => {\n+    const observerOption = {\n+      root: null,\n+      rootMargin: \"0px\",\n+      // threshold :\n+    }\n+    const observer = new IntersectionObserver(handleObserver, observerOption)\n+    observer.observe(imgRef)\n+  }, [])\n \n   return (\n     <div className=\"Card text-center\">\n       <img src={props.image} ref={imgRef} />\n"
+                },
+                {
+                    "date": 1670488604500,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -2,13 +2,13 @@\n \n function Card(props) {\n   const imgRef = useRef(null)\n \n-  const handleObserver = () => {\n-    console.log(\"1111\")\n-  }\n+  useEffect(() => {\n+    const handleObserver = () => {\n+      console.log(\"1111\")\n+    }\n \n-  useEffect(() => {\n     const observerOption = {\n       root: null,\n       rootMargin: \"0px\",\n       // threshold :\n"
+                },
+                {
+                    "date": 1670488627006,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -12,10 +12,12 @@\n       root: null,\n       rootMargin: \"0px\",\n       // threshold :\n     }\n+\n     const observer = new IntersectionObserver(handleObserver, observerOption)\n-    observer.observe(imgRef)\n+\n+    observer.observe(imgRef.current)\n   }, [])\n \n   return (\n     <div className=\"Card text-center\">\n"
+                },
+                {
+                    "date": 1670488841447,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -3,9 +3,9 @@\n function Card(props) {\n   const imgRef = useRef(null)\n \n   useEffect(() => {\n-    const handleObserver = () => {\n+    const handleObserver = (entries, observer) => {\n       console.log(\"1111\")\n     }\n \n     const observerOption = {\n"
+                },
+                {
+                    "date": 1670488858356,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -3,9 +3,10 @@\n function Card(props) {\n   const imgRef = useRef(null)\n \n   useEffect(() => {\n-    const handleObserver = (entries, observer) => {\n+    const handleObserver = (entries) => {\n+      console.log(entries)\n       console.log(\"1111\")\n     }\n \n     const observerOption = {\n"
+                },
+                {
+                    "date": 1670489046505,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -4,10 +4,14 @@\n   const imgRef = useRef(null)\n \n   useEffect(() => {\n     const handleObserver = (entries) => {\n-      console.log(entries)\n-      console.log(\"1111\")\n+      entries.forEach((entrie) => {\n+        if (entrie.isIntersecting) {\n+          console.log(entries)\n+          console.log(\"1111\")\n+        }\n+      })\n     }\n \n     const observerOption = {\n       root: null,\n"
+                },
+                {
+                    "date": 1670489263940,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -25,9 +25,9 @@\n   }, [])\n \n   return (\n     <div className=\"Card text-center\">\n-      <img src={props.image} ref={imgRef} />\n+      <img data-src={props.image} ref={imgRef} />\n       <div className=\"p-5 font-semibold text-gray-700 text-xl md:text-lg lg:text-xl keep-all\">\n         {props.children}\n       </div>\n     </div>\n"
+                },
+                {
+                    "date": 1670489285825,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -6,8 +6,9 @@\n   useEffect(() => {\n     const handleObserver = (entries) => {\n       entries.forEach((entrie) => {\n         if (entrie.isIntersecting) {\n+          entrie.target.src = entrie.target.dataset\n           console.log(entries)\n           console.log(\"1111\")\n         }\n       })\n"
+                },
+                {
+                    "date": 1670489294561,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -6,11 +6,9 @@\n   useEffect(() => {\n     const handleObserver = (entries) => {\n       entries.forEach((entrie) => {\n         if (entrie.isIntersecting) {\n-          entrie.target.src = entrie.target.dataset\n-          console.log(entries)\n-          console.log(\"1111\")\n+          entrie.target.src = entrie.target.dataset.src\n         }\n       })\n     }\n \n"
+                },
+                {
+                    "date": 1670489370359,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -7,8 +7,9 @@\n     const handleObserver = (entries) => {\n       entries.forEach((entrie) => {\n         if (entrie.isIntersecting) {\n           entrie.target.src = entrie.target.dataset.src\n+          console.log(entrie.target.src)\n         }\n       })\n     }\n \n"
+                },
+                {
+                    "date": 1670489589635,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -3,12 +3,13 @@\n function Card(props) {\n   const imgRef = useRef(null)\n \n   useEffect(() => {\n-    const handleObserver = (entries) => {\n+    const handleObserver = (entries, observer) => {\n       entries.forEach((entrie) => {\n         if (entrie.isIntersecting) {\n           entrie.target.src = entrie.target.dataset.src\n+          observer.unobserve(imgRef.current)\n           console.log(entrie.target.src)\n         }\n       })\n     }\n"
+                },
+                {
+                    "date": 1670544784004,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,31 +1,11 @@\n import React, { useEffect, useRef } from \"react\"\n+import useIntersectionObserverr from \"../hooks/useIntersectionObserver\"\n \n function Card(props) {\n   const imgRef = useRef(null)\n+  const [] = useIntersectionObserverr(imgRef)\n \n-  useEffect(() => {\n-    const handleObserver = (entries, observer) => {\n-      entries.forEach((entrie) => {\n-        if (entrie.isIntersecting) {\n-          entrie.target.src = entrie.target.dataset.src\n-          observer.unobserve(imgRef.current)\n-          console.log(entrie.target.src)\n-        }\n-      })\n-    }\n-\n-    const observerOption = {\n-      root: null,\n-      rootMargin: \"0px\",\n-      // threshold :\n-    }\n-\n-    const observer = new IntersectionObserver(handleObserver, observerOption)\n-\n-    observer.observe(imgRef.current)\n-  }, [])\n-\n   return (\n     <div className=\"Card text-center\">\n       <img data-src={props.image} ref={imgRef} />\n       <div className=\"p-5 font-semibold text-gray-700 text-xl md:text-lg lg:text-xl keep-all\">\n"
+                },
+                {
+                    "date": 1670544825060,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -2,9 +2,9 @@\n import useIntersectionObserverr from \"../hooks/useIntersectionObserver\"\n \n function Card(props) {\n   const imgRef = useRef(null)\n-  const [] = useIntersectionObserverr(imgRef)\n+  const [a] = useIntersectionObserverr(imgRef)\n \n   return (\n     <div className=\"Card text-center\">\n       <img data-src={props.image} ref={imgRef} />\n"
+                },
+                {
+                    "date": 1670544914582,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -2,9 +2,9 @@\n import useIntersectionObserverr from \"../hooks/useIntersectionObserver\"\n \n function Card(props) {\n   const imgRef = useRef(null)\n-  const [a] = useIntersectionObserverr(imgRef)\n+  const { observer } = useIntersectionObserverr(imgRef)\n \n   return (\n     <div className=\"Card text-center\">\n       <img data-src={props.image} ref={imgRef} />\n"
+                },
+                {
+                    "date": 1670544933171,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -4,8 +4,12 @@\n function Card(props) {\n   const imgRef = useRef(null)\n   const { observer } = useIntersectionObserverr(imgRef)\n \n+  useEffect(() => {\n+    observer.observe()\n+  }, [observer])\n+\n   return (\n     <div className=\"Card text-center\">\n       <img data-src={props.image} ref={imgRef} />\n       <div className=\"p-5 font-semibold text-gray-700 text-xl md:text-lg lg:text-xl keep-all\">\n"
+                },
+                {
+                    "date": 1670544976076,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -5,9 +5,9 @@\n   const imgRef = useRef(null)\n   const { observer } = useIntersectionObserverr(imgRef)\n \n   useEffect(() => {\n-    observer.observe()\n+    observer.observe(imgRef)\n   }, [observer])\n \n   return (\n     <div className=\"Card text-center\">\n"
+                },
+                {
+                    "date": 1670545016579,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -5,9 +5,11 @@\n   const imgRef = useRef(null)\n   const { observer } = useIntersectionObserverr(imgRef)\n \n   useEffect(() => {\n-    observer.observe(imgRef)\n+    if (observer) {\n+      observer.observe(imgRef)\n+    }\n   }, [observer])\n \n   return (\n     <div className=\"Card text-center\">\n"
+                },
+                {
+                    "date": 1670545027494,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -6,9 +6,9 @@\n   const { observer } = useIntersectionObserverr(imgRef)\n \n   useEffect(() => {\n     if (observer) {\n-      observer.observe(imgRef)\n+      observer.observe(imgRef.current)\n     }\n   }, [observer])\n \n   return (\n"
+                },
+                {
+                    "date": 1670547678607,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -12,9 +12,11 @@\n   }, [observer])\n \n   return (\n     <div className=\"Card text-center\">\n-      <img data-src={props.image} ref={imgRef} />\n+      <picture>\n+        <img data-src={props.image} ref={imgRef} />\n+      </picture>\n       <div className=\"p-5 font-semibold text-gray-700 text-xl md:text-lg lg:text-xl keep-all\">\n         {props.children}\n       </div>\n     </div>\n"
+                },
+                {
+                    "date": 1670547691232,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -13,8 +13,9 @@\n \n   return (\n     <div className=\"Card text-center\">\n       <picture>\n+        <source />\n         <img data-src={props.image} ref={imgRef} />\n       </picture>\n       <div className=\"p-5 font-semibold text-gray-700 text-xl md:text-lg lg:text-xl keep-all\">\n         {props.children}\n"
+                },
+                {
+                    "date": 1670547770028,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -13,9 +13,9 @@\n \n   return (\n     <div className=\"Card text-center\">\n       <picture>\n-        <source />\n+        <source srcSet={props.webpImage} type=\"image/webp\" />\n         <img data-src={props.image} ref={imgRef} />\n       </picture>\n       <div className=\"p-5 font-semibold text-gray-700 text-xl md:text-lg lg:text-xl keep-all\">\n         {props.children}\n"
+                },
+                {
+                    "date": 1670547876178,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -13,9 +13,9 @@\n \n   return (\n     <div className=\"Card text-center\">\n       <picture>\n-        <source srcSet={props.webpImage} type=\"image/webp\" />\n+        <source data-srcSet={props.webpImage} type=\"image/webp\" />\n         <img data-src={props.image} ref={imgRef} />\n       </picture>\n       <div className=\"p-5 font-semibold text-gray-700 text-xl md:text-lg lg:text-xl keep-all\">\n         {props.children}\n"
+                },
+                {
+                    "date": 1670548127894,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -13,9 +13,9 @@\n \n   return (\n     <div className=\"Card text-center\">\n       <picture>\n-        <source data-srcSet={props.webpImage} type=\"image/webp\" />\n+        <source data-srcSet={props.webpImage + \"s\"} type=\"image/webp\" />\n         <img data-src={props.image} ref={imgRef} />\n       </picture>\n       <div className=\"p-5 font-semibold text-gray-700 text-xl md:text-lg lg:text-xl keep-all\">\n         {props.children}\n"
+                },
+                {
+                    "date": 1670548140900,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -13,9 +13,9 @@\n \n   return (\n     <div className=\"Card text-center\">\n       <picture>\n-        <source data-srcSet={props.webpImage + \"s\"} type=\"image/webp\" />\n+        <source data-srcSet={props.webpImage} type=\"image/webp\" />\n         <img data-src={props.image} ref={imgRef} />\n       </picture>\n       <div className=\"p-5 font-semibold text-gray-700 text-xl md:text-lg lg:text-xl keep-all\">\n         {props.children}\n"
+                },
+                {
+                    "date": 1670548164361,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -13,9 +13,9 @@\n \n   return (\n     <div className=\"Card text-center\">\n       <picture>\n-        <source data-srcSet={props.webpImage} type=\"image/webp\" />\n+        <source data-srcSet={props.webpImage} type=\"image/wbp\" />\n         <img data-src={props.image} ref={imgRef} />\n       </picture>\n       <div className=\"p-5 font-semibold text-gray-700 text-xl md:text-lg lg:text-xl keep-all\">\n         {props.children}\n"
+                },
+                {
+                    "date": 1670548180163,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -13,9 +13,9 @@\n \n   return (\n     <div className=\"Card text-center\">\n       <picture>\n-        <source data-srcSet={props.webpImage} type=\"image/wbp\" />\n+        <source data-srcSet={props.webpImage} type=\"image/webp\" />\n         <img data-src={props.image} ref={imgRef} />\n       </picture>\n       <div className=\"p-5 font-semibold text-gray-700 text-xl md:text-lg lg:text-xl keep-all\">\n         {props.children}\n"
+                }
+            ],
+            "date": 1670488451369,
+            "name": "Commit-0",
+            "content": "import React from \"react\"\n\nfunction Card(props) {\n  const handleObserver = () => {\n    console.log(\"1111\")\n  }\n\n  const observerOption = {\n    root: null,\n    rootMargin: \"0px\",\n    // threshold :\n  }\n  const observer = new IntersectionObserver(handleObserver, observerOption)\n  if (threeColumnsRef) {\n    observer.observe(threeColumnsRef.current)\n  }\n\n  return (\n    <div className=\"Card text-center\">\n      <img src={props.image} />\n      <div className=\"p-5 font-semibold text-gray-700 text-xl md:text-lg lg:text-xl keep-all\">\n        {props.children}\n      </div>\n    </div>\n  )\n}\n\nexport default Card\n"
+        }
+    ]
+}

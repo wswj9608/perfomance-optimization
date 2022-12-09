@@ -1,0 +1,46 @@
+{
+    "sourceFile": "src/App.css",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 7,
+            "patches": [
+                {
+                    "date": 1670553200963,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1670568045659,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -3,10 +3,10 @@\n }\n \n @font-face {\n   font-family: BMYEONSUNG;\n-  src: url(\"./assets/fonts/BMYEONSUNG.ttf\");\n-  font-display: blocl;\n+  src: url(\"./assets/fonts/BMYEONSUNG.woff2\");\n+  font-display: block;\n }\n \n .BannerVideo {\n   font-family: \"BMYEONSUNG\", sans-serif;\n"
+                },
+                {
+                    "date": 1670568064263,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -3,9 +3,9 @@\n }\n \n @font-face {\n   font-family: BMYEONSUNG;\n-  src: url(\"./assets/fonts/BMYEONSUNG.woff2\");\n+  src: url(\"./assets/fonts/BMYEONSUNG.woff2\") format(\"woff2\");\n   font-display: block;\n }\n \n .BannerVideo {\n"
+                },
+                {
+                    "date": 1670568149411,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -3,9 +3,11 @@\n }\n \n @font-face {\n   font-family: BMYEONSUNG;\n-  src: url(\"./assets/fonts/BMYEONSUNG.woff2\") format(\"woff2\");\n+  src: url(\"./assets/fonts/BMYEONSUNG.woff2\") format(\"woff2\"),\n+\t\t\t url('./assets/fonts/BMYEONSUNG.woff') fromat('woff'),\n+\t\t\t url('./assets/fonts/BMYEONSUNG.ttf') format('truetype') \n   font-display: block;\n }\n \n .BannerVideo {\n"
+                },
+                {
+                    "date": 1670568175886,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -4,10 +4,10 @@\n \n @font-face {\n   font-family: BMYEONSUNG;\n   src: url(\"./assets/fonts/BMYEONSUNG.woff2\") format(\"woff2\"),\n-\t\t\t url('./assets/fonts/BMYEONSUNG.woff') fromat('woff'),\n-\t\t\t url('./assets/fonts/BMYEONSUNG.ttf') format('truetype') \n+    url(\"./assets/fonts/BMYEONSUNG.woff\") fromat(\"woff\"),\n+    url(\"./assets/fonts/BMYEONSUNG.ttf\") format(\"truetype\");\n   font-display: block;\n }\n \n .BannerVideo {\n"
+                },
+                {
+                    "date": 1670568235380,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -4,9 +4,9 @@\n \n @font-face {\n   font-family: BMYEONSUNG;\n   src: url(\"./assets/fonts/BMYEONSUNG.woff2\") format(\"woff2\"),\n-    url(\"./assets/fonts/BMYEONSUNG.woff\") fromat(\"woff\"),\n+    url(\"./assets/fonts/BMYEONSUNG.woff\") format(\"woff\"),\n     url(\"./assets/fonts/BMYEONSUNG.ttf\") format(\"truetype\");\n   font-display: block;\n }\n \n"
+                },
+                {
+                    "date": 1670568338207,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -3,9 +3,10 @@\n }\n \n @font-face {\n   font-family: BMYEONSUNG;\n-  src: url(\"./assets/fonts/BMYEONSUNG.woff2\") format(\"woff2\"),\n+  src: local(\"BMYEONSUNG\"),\n+    url(\"./assets/fonts/BMYEONSUNG.woff2\") format(\"woff2\"),\n     url(\"./assets/fonts/BMYEONSUNG.woff\") format(\"woff\"),\n     url(\"./assets/fonts/BMYEONSUNG.ttf\") format(\"truetype\");\n   font-display: block;\n }\n"
+                },
+                {
+                    "date": 1670569205045,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -8,8 +8,9 @@\n     url(\"./assets/fonts/BMYEONSUNG.woff2\") format(\"woff2\"),\n     url(\"./assets/fonts/BMYEONSUNG.woff\") format(\"woff\"),\n     url(\"./assets/fonts/BMYEONSUNG.ttf\") format(\"truetype\");\n   font-display: block;\n+  unicode-range: u+0041;\n }\n \n .BannerVideo {\n   font-family: \"BMYEONSUNG\", sans-serif;\n"
+                }
+            ],
+            "date": 1670553200963,
+            "name": "Commit-0",
+            "content": ".react-player iframe {\n  height: 100% !important;\n}\n\n@font-face {\n  font-family: BMYEONSUNG;\n  src: url(\"./assets/fonts/BMYEONSUNG.ttf\");\n  font-display: blocl;\n}\n\n.BannerVideo {\n  font-family: \"BMYEONSUNG\", sans-serif;\n}\n"
+        }
+    ]
+}

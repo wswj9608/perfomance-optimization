@@ -1,0 +1,42 @@
+{
+    "sourceFile": "server/server.js",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 6,
+            "patches": [
+                {
+                    "date": 1670479493348,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1670484047160,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,7 +1,7 @@\n const express = require(\"express\")\n const app = express()\n-const port = 8080\n+const port = 5000\n const path = require(\"path\")\n \n const header = {\n   setHeaders: (res, path) => {\n"
+                },
+                {
+                    "date": 1670484070527,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,7 +1,7 @@\n const express = require(\"express\")\n const app = express()\n-const port = 5000\n+const port = 8080\n const path = require(\"path\")\n \n const header = {\n   setHeaders: (res, path) => {\n"
+                },
+                {
+                    "date": 1670484177783,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,5 +1,6 @@\n const express = require(\"express\")\n+const cors = require(\"cors\")\n const app = express()\n const port = 8080\n const path = require(\"path\")\n \n"
+                },
+                {
+                    "date": 1670484196911,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -14,9 +14,9 @@\n     res.setHeader(\"Pragma\", \"no-cache\")\n   },\n }\n \n-app.use(express.static(path.join(__dirname, \"../build\"), header))\n+app.use(cors(express.static(path.join(__dirname, \"../build\"), header)))\n app.get(\"*\", (req, res) => {\n   res.sendFile(path.join(__dirname, \"../build/index.html\"))\n })\n \n"
+                },
+                {
+                    "date": 1670484212998,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,6 +1,6 @@\n const express = require(\"express\")\n-const cors = require(\"cors\")\n+const cors = require(\"\")\n const app = express()\n const port = 8080\n const path = require(\"path\")\n \n@@ -14,9 +14,9 @@\n     res.setHeader(\"Pragma\", \"no-cache\")\n   },\n }\n \n-app.use(cors(express.static(path.join(__dirname, \"../build\"), header)))\n+app.use(express.static(path.join(__dirname, \"../build\"), header))\n app.get(\"*\", (req, res) => {\n   res.sendFile(path.join(__dirname, \"../build/index.html\"))\n })\n \n"
+                },
+                {
+                    "date": 1670484219731,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,6 +1,6 @@\n const express = require(\"express\")\n-const cors = require(\"\")\n+const cors = require(\"cors\")\n const app = express()\n const port = 8080\n const path = require(\"path\")\n \n@@ -14,8 +14,10 @@\n     res.setHeader(\"Pragma\", \"no-cache\")\n   },\n }\n \n+app.use(cors)\n+\n app.use(express.static(path.join(__dirname, \"../build\"), header))\n app.get(\"*\", (req, res) => {\n   res.sendFile(path.join(__dirname, \"../build/index.html\"))\n })\n"
+                }
+            ],
+            "date": 1670479493348,
+            "name": "Commit-0",
+            "content": "const express = require(\"express\")\nconst app = express()\nconst port = 8080\nconst path = require(\"path\")\n\nconst header = {\n  setHeaders: (res, path) => {\n    res.setHeader(\n      \"Cache-Control\",\n      \"private, no-cache, no-store, must-revalidate\"\n    )\n    res.setHeader(\"Expires\", \"-1\")\n    res.setHeader(\"Pragma\", \"no-cache\")\n  },\n}\n\napp.use(express.static(path.join(__dirname, \"../build\"), header))\napp.get(\"*\", (req, res) => {\n  res.sendFile(path.join(__dirname, \"../build/index.html\"))\n})\n\napp.listen(port, () =>\n  console.log(`Example app listening at http://localhost:${port}`)\n)\n"
+        }
+    ]
+}
